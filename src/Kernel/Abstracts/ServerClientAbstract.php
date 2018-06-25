@@ -6,11 +6,11 @@
  * Time: 17:15
  */
 
-namespace OverNick\Auth\Kernel\Abstracts;
+namespace OverNick\SimpleDemo\Kernel\Abstracts;
 
 
-use OverNick\Auth\Kernel\Action;
-use OverNick\Auth\Kernel\Traits\HttpRequestTrait;
+use OverNick\SimpleDemo\Kernel\Action;
+use OverNick\SimpleDemo\Kernel\Traits\HttpRequestTrait;
 use Pimple\Container;
 
 abstract class ServerClientAbstract
@@ -18,7 +18,7 @@ abstract class ServerClientAbstract
     use HttpRequestTrait;
 
     /**
-     * @var \OverNick\Auth\Server\App
+     * @var \OverNick\SimpleDemo\Server\App
      */
     protected $app;
 

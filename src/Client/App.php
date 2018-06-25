@@ -5,19 +5,19 @@
  * Date: 2018/6/20
  * Time: 17:42
  */
-namespace OverNick\Auth\Client;
+namespace OverNick\SimpleDemo\Client;
 
-use OverNick\Auth\Kernel\Abstracts\BaseClientAbstract;
-use OverNick\Auth\Kernel\Abstracts\BaseAppAbstract;
+use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
+use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
 use OverNick\Support\Arr;
 
 /**
  * Class AuthManage
  *
- * @property \OverNick\Auth\Client\Product\Client $product
- * @property \OverNick\Auth\Client\Update\Client $update
+ * @property \OverNick\SimpleDemo\Client\Product\Client $product
+ * @property \OverNick\SimpleDemo\Client\Update\Client $update
  *
- * @package OverNick\Auth
+ * @package OverNick\SimpleDemo
  */
 class App extends BaseAppAbstract
 {

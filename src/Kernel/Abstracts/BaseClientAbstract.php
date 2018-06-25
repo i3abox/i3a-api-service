@@ -5,22 +5,22 @@
  * Date: 2018/6/20
  * Time: 18:00
  */
-namespace OverNick\Auth\Kernel\Abstracts;
+namespace OverNick\SimpleDemo\Kernel\Abstracts;
 
-use OverNick\Auth\Kernel\Action;
-use OverNick\Auth\Kernel\Traits\HttpRequestTrait;
+use OverNick\SimpleDemo\Kernel\Action;
+use OverNick\SimpleDemo\Kernel\Traits\HttpRequestTrait;
 use Pimple\Container;
 
 /**
  * Class BaseClientAbstract
- * @package OverNick\Auth\Kernel\Abstracts
+ * @package OverNick\SimpleDemo\Kernel\Abstracts
  */
 abstract class BaseClientAbstract
 {
     use HttpRequestTrait;
 
     /**
-     * @var \OverNick\Auth\Client\App
+     * @var \OverNick\SimpleDemo\Client\App
      */
     protected $app;
 

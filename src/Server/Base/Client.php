@@ -5,16 +5,16 @@
  * Date: 2018/6/21
  * Time: 17:32
  */
-namespace OverNick\Auth\Server\Base;
+namespace OverNick\SimpleDemo\Server\Base;
 
-use OverNick\Auth\Kernel\Abstracts\ServerClientAbstract;
-use OverNick\Auth\Kernel\Action;
+use OverNick\SimpleDemo\Kernel\Abstracts\ServerClientAbstract;
+use OverNick\SimpleDemo\Kernel\Action;
 
 /**
  *
  *
  * Class Client
- * @package OverNick\Auth\Server\Base
+ * @package OverNick\SimpleDemo\Server\Base
  */
 class Client extends ServerClientAbstract
 {

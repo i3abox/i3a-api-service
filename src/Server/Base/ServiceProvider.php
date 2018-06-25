@@ -6,7 +6,7 @@
  * Time: 17:56
  */
 
-namespace OverNick\Auth\Server\Base;
+namespace OverNick\SimpleDemo\Server\Base;
 
 
 use Pimple\Container;
@@ -16,7 +16,7 @@ use Pimple\ServiceProviderInterface;
  * 基础服务
  *
  * Class ServiceProvider
- * @package OverNick\Auth\Server\Base
+ * @package OverNick\SimpleDemo\Server\Base
  */
 class ServiceProvider implements ServiceProviderInterface
 {

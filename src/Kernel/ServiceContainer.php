@@ -1,5 +1,5 @@
 <?php
-namespace OverNick\Auth\Kernel;
+namespace OverNick\SimpleDemo\Kernel;
 
 use Pimple\Container;
 

@@ -6,17 +6,17 @@
  * Time: 15:45
  */
 
-namespace OverNick\Auth\Client\Product;
+namespace OverNick\SimpleDemo\Client\Product;
 
 
-use OverNick\Auth\Kernel\Abstracts\BaseClientAbstract;
-use OverNick\Auth\Kernel\Action;
+use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
+use OverNick\SimpleDemo\Kernel\Action;
 
 /**
  * 产品相关
  *
  * Class ProductClient
- * @package OverNick\Auth\Client
+ * @package OverNick\SimpleDemo\Client
  */
 class Client extends BaseClientAbstract
 {

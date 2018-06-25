@@ -6,11 +6,11 @@
  * Time: 18:21
  */
 
-namespace OverNick\Auth\Kernel;
+namespace OverNick\SimpleDemo\Kernel;
 
 /**
  * Class Action
- * @package OverNick\Auth\Kernel
+ * @package OverNick\SimpleDemo\Kernel
  */
 class Action
 {

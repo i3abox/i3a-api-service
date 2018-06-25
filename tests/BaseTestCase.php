@@ -20,12 +20,12 @@ class BaseTestCase extends \PHPUnit\Framework\TestCase
     protected $file = __DIR__.'/../tests/simple-auth.php';
 
     /**
-     * @return \OverNick\Auth\Server\App
+     * @return \OverNick\SimpleDemo\Server\App
      */
     protected function getServer()
     {
-        if (!$this->client instanceof \OverNick\Auth\Server\App){
-            $this->client = new \OverNick\Auth\Server\App(require $this->file);
+        if (!$this->client instanceof \OverNick\SimpleDemo\Server\App){
+            $this->client = new \OverNick\SimpleDemo\Server\App(require $this->file);
         }
 
         return $this->client;
@@ -34,12 +34,12 @@ class BaseTestCase extends \PHPUnit\Framework\TestCase
     /**
      * get Client
      *
-     * @return \OverNick\Auth\Client\App
+     * @return \OverNick\SimpleDemo\Client\App
      */
     protected function getClient()
     {
-        if(!$this->client instanceof \OverNick\Auth\Client\App){
-            $this->client = new \OverNick\Auth\Client\App(require $this->file);
+        if(!$this->client instanceof \OverNick\SimpleDemo\Client\App){
+            $this->client = new \OverNick\SimpleDemo\Client\App(require $this->file);
         }
 
         return $this->client;

@@ -5,17 +5,17 @@
  * Date: 2018/6/21
  * Time: 13:42
  */
-namespace OverNick\Auth\Client\Update;
+namespace OverNick\SimpleDemo\Client\Update;
 
-use OverNick\Auth\Kernel\Abstracts\BaseClientAbstract;
-use OverNick\Auth\Kernel\Action;
+use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
+use OverNick\SimpleDemo\Kernel\Action;
 use OverNick\Support\Str;
 
 /**
  * 更新
  *
  * Class UpdateClient
- * @package OverNick\Auth\Client
+ * @package OverNick\SimpleDemo\Client
  */
 class Client extends BaseClientAbstract
 {

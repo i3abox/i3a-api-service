@@ -5,9 +5,9 @@
  * Date: 2018/6/21
  * Time: 15:43
  */
-namespace OverNick\Auth\Client\Product;
+namespace OverNick\SimpleDemo\Client\Product;
 
-use OverNick\Auth\Client\Product\Client;
+use OverNick\SimpleDemo\Client\Product\Client;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -15,7 +15,7 @@ use Pimple\ServiceProviderInterface;
  * 产品
  *
  * Class ActiveServiceProvider
- * @package OverNick\Auth\Providers
+ * @package OverNick\SimpleDemo\Providers
  */
 class ServiceProvider implements ServiceProviderInterface
 {

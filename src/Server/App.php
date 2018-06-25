@@ -6,19 +6,19 @@
  * Time: 16:03
  */
 
-namespace OverNick\Auth\Server;
+namespace OverNick\SimpleDemo\Server;
 
-use OverNick\Auth\Kernel\Action;
-use OverNick\Auth\Kernel\Abstracts\BaseAppAbstract;
+use OverNick\SimpleDemo\Kernel\Action;
+use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
 
 /**
  * 服务端
  *
  * Class ServerApp
  *
- * @property \OverNick\Auth\Server\Base\Client $base
+ * @property \OverNick\SimpleDemo\Server\Base\Client $base
  *
- * @package OverNick\Auth
+ * @package OverNick\SimpleDemo
  */
 class App extends BaseAppAbstract
 {

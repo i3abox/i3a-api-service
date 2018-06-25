@@ -6,17 +6,17 @@
  * Time: 16:03
  */
 
-namespace OverNick\Auth\Kernel\Abstracts;
+namespace OverNick\SimpleDemo\Kernel\Abstracts;
 
-use OverNick\Auth\Kernel\Action;
-use OverNick\Auth\Kernel\ServiceContainer;
+use OverNick\SimpleDemo\Kernel\Action;
+use OverNick\SimpleDemo\Kernel\ServiceContainer;
 use OverNick\Support\Arr;
 
 /**
  * 基础类
  *
  * Class BaseApp
- * @package OverNick\Auth\Kernel
+ * @package OverNick\SimpleDemo\Kernel
  */
 class BaseAppAbstract extends ServiceContainer
 {
@@ -26,7 +26,7 @@ class BaseAppAbstract extends ServiceContainer
     protected $gateway = 'http://apiserv.i3abox.com/v1/gateway';
 
     protected $actions = [
-        Action::SERVER_UPDATE => \OverNick\Auth\Action\UpdateAction::class,
+        Action::SERVER_UPDATE => \OverNick\SimpleDemo\Action\UpdateAction::class,
     ];
 
     /**

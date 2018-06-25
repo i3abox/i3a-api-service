@@ -5,7 +5,7 @@
  * Date: 2018/4/14
  * Time: 16:57
  */
-namespace OverNick\Auth\Kernel\Providers;
+namespace OverNick\SimpleDemo\Kernel\Providers;
 
 use GuzzleHttp\Client;
 use Pimple\Container;

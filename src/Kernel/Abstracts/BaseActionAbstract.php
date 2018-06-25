@@ -5,19 +5,19 @@
  * Date: 2018/6/21
  * Time: 16:44
  */
-namespace OverNick\Auth\Action;
+namespace OverNick\SimpleDemo\Action;
 
-use OverNick\Auth\Kernel\Action;
+use OverNick\SimpleDemo\Kernel\Action;
 use Pimple\Container;
 
 /**
  * Class BaseActionAbstract
- * @package OverNick\Auth\Action
+ * @package OverNick\SimpleDemo\Action
  */
 abstract class BaseActionAbstract
 {
     /**
-     * @var \OverNick\Auth\Client\App
+     * @var \OverNick\SimpleDemo\Client\App
      */
     protected $app;
 

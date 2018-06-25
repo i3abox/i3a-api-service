@@ -6,13 +6,13 @@
  * Time: 17:38
  */
 
-namespace OverNick\Auth\Action;
+namespace OverNick\SimpleDemo\Action;
 
 /**
  * 更新推送文件
  *
  * Class UpdateAction
- * @package OverNick\Auth\Action
+ * @package OverNick\SimpleDemo\Action
  */
 class UpdateAction extends BaseActionAbstract
 {
