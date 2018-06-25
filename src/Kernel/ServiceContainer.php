@@ -1,6 +1,7 @@
 <?php
 namespace OverNick\SimpleDemo\Kernel;
 
+use OverNick\Support\Config;
 use Pimple\Container;
 
 /**
