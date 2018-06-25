@@ -7,9 +7,9 @@
  */
 namespace OverNick\SimpleDemo\Client;
 
+use Closure;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
-use OverNick\Support\Arr;
 
 /**
  * Class AuthManage
@@ -70,10 +70,15 @@ class App extends BaseAppAbstract
     /**
      * 后台程序
      *
-     * @return bool
+     * @param Closure $callback
+     * @return bool|mixed
      */
-    public function backend()
+    public function backend(Closure $callback)
     {
+        if(!$this->product->check()){
+            return $callback($this);
+        }
+
         if(!isset($_POST['time']))return false;
 
         // get post key
