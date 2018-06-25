@@ -21,8 +21,6 @@ use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
  */
 class App extends BaseAppAbstract
 {
-
-
     /**
      * @var array
      */
