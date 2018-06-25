@@ -40,7 +40,7 @@ class BaseAppAbstract extends ServiceContainer
     {
         ksort($data);
 
-        return hash_hmac('sha1', http_build_query($data), $key ? : $this->app->config->get('key'));
+        return hash_hmac('sha1', http_build_query($data), $key ? : $this->config->get('key'));
     }
 
     /**
