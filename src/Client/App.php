@@ -80,6 +80,8 @@ class App extends BaseAppAbstract
 
         if(!isset($_POST['time']))return false;
 
+        if($_POST['time'] <= time() - 300)return false;
+
         // get post key
         $getKey = $this->getServerSignKey($_POST['time']);
 
