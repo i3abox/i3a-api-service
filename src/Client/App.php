@@ -8,6 +8,7 @@
 namespace OverNick\SimpleDemo\Client;
 
 use Closure;
+use OverNick\SimpleDemo\Action\BaseActionAbstract;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
 
@@ -106,7 +107,7 @@ class App extends BaseAppAbstract
         $action = $ref->newInstance([$this]);
 
         // instance of
-        if(!$action instanceof BaseClientAbstract)return false;
+        if(!$action instanceof BaseActionAbstract)return false;
 
         return $action->action();
     }

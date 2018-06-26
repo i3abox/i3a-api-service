@@ -6,6 +6,8 @@
  * Time: 11:07
  */
 
+namespace OverNick\SimpleDemo\Test;
+
 /**
  * Class BaseTestCase
  */

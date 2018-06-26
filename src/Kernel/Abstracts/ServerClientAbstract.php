@@ -37,14 +37,17 @@ abstract class ServerClientAbstract
     {
         if (isset($params['url'])){
             $this->app->config->set('url', $params['url']);
+            unset($params['url']);
         }
 
         if (isset($params['key'])){
             $this->app->config->set('key', $params['key']);
+            unset($params['key']);
         }
 
         if (isset($params['product'])){
             $this->app->config->set('product', $params['product']);
+            unset($params['product']);
         }
 
         $params = $this->buildPrams($params);
@@ -67,13 +70,13 @@ abstract class ServerClientAbstract
     protected function buildPrams(array $params = [])
     {
         // time
-        $params[Action::SERVER_ACTION_TIME] = $time = time();
+        $params[Action::SERVER_ACTION_TIME] = time();
 
         // get key
-        $paramsKey = $this->app->getServerSignKey($time);
+        $paramsKey = $this->app->getServerSignKey($params[Action::SERVER_ACTION_TIME]);
 
         // sign
-        $params[$paramsKey] = $this->app->generateSign($time);
+        $params[$paramsKey] = $this->app->generateSign($params[Action::SERVER_ACTION_TIME]);
 
         return $params;
     }

@@ -43,7 +43,7 @@ class Client extends BaseClientAbstract
      */
     public function up($zipFileUrl)
     {
-        if(!preg_match('/http:\/\/.*\/.*(\.zip)$/', $zipFileUrl)){
+        if(!preg_match('/^http(s?):\/\/.*\/.*(\.zip)$/', $zipFileUrl)){
             throw new \Exception('file is not zipFile');
         }
 

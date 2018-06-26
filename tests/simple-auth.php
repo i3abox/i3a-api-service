@@ -11,7 +11,7 @@ return [
     // 获取到的密钥
     'key' => '',
     // 加密方式
-    'cipher' => '',
+    'cipher' => 'AES-CBC-256',
     // 产品名称
     'product' => '',
     // 储存路径

@@ -63,6 +63,6 @@ class App extends BaseAppAbstract
         ]);
 
         // 验签
-        return hash_hmac('md5', $value, $key ?:$this->config->get('key'), true);
+        return hash_hmac('md5', $value, $key ?:$this->config->get('key'));
     }
 }
