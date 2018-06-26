@@ -72,4 +72,14 @@ class Action
         self::TYPE_SIGN => '签名'
     ];
 
+    /**
+     * 加密方式
+     */
+    const CIPHER_256 = 'AES-256-CBC';
+    const CIPHER_128 = 'AES-128-CBC';
+
+    const CIPHER = [
+        self::CIPHER_256, self::CIPHER_128
+    ];
+
 }
