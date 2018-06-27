@@ -63,6 +63,7 @@ class Action
     const TYPE_PRODUCT = 'p';
     const TYPE_TIME = 't';
     const TYPE_SIGN = 's';
+    const TYPE_VERSION = 'v';
 
     const TYPE = [
         self::TYPE_ACTION => '动作',
@@ -71,7 +72,8 @@ class Action
         self::TYPE_UID => 'UID',
         self::TYPE_PRODUCT => '产品',
         self::TYPE_TIME => '时间',
-        self::TYPE_SIGN => '签名'
+        self::TYPE_SIGN => '签名',
+        self::TYPE_VERSION => '版本'
     ];
 
     /**
