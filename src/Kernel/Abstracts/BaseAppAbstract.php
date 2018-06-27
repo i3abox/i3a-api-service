@@ -8,6 +8,8 @@
 
 namespace OverNick\SimpleDemo\Kernel\Abstracts;
 
+use OverNick\SimpleDemo\Action\UpdateAction;
+use OverNick\SimpleDemo\Action\ActiveAction;
 use OverNick\SimpleDemo\Kernel\Action;
 use OverNick\SimpleDemo\Kernel\ServiceContainer;
 use OverNick\Support\Arr;
@@ -25,8 +27,14 @@ class BaseAppAbstract extends ServiceContainer
      */
     protected $gateway = 'http://apiserv.i3abox.com/v1/gateway';
 
+    /**
+     * 动作列表
+     *
+     * @var array
+     */
     protected $actions = [
-        Action::SERVER_UPDATE => \OverNick\SimpleDemo\Action\UpdateAction::class,
+        Action::SERVER_UPDATE => UpdateAction::class,
+        Action::SERVER_ACTIVE => ActiveAction::class
     ];
 
     /**

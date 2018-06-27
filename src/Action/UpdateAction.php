@@ -28,7 +28,7 @@ class UpdateAction extends BaseActionAbstract
              $this->app->update->up($_POST['zip']);
              $this->rspSuc();
          }catch (\Exception $exception){
-            return false;
+            $this->rspFail();
          }
     }
 }

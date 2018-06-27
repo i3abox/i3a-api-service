@@ -11,7 +11,7 @@ use OverNick\SimpleDemo\Kernel\Abstracts\ServerClientAbstract;
 use OverNick\SimpleDemo\Kernel\Action;
 
 /**
- *
+ * 基础
  *
  * Class Client
  * @package OverNick\SimpleDemo\Server\Base
@@ -19,6 +19,23 @@ use OverNick\SimpleDemo\Kernel\Action;
 class Client extends ServerClientAbstract
 {
 
+    /**
+     * 远程激活
+     *
+     * @param array $params
+     * @throws \Exception
+     */
+    public function active(array $params = [])
+    {
+        if(!array_key_exists('env', $params)){
+            throw new \Exception('params env not found!');
+        }
+
+        $params[Action::SERVER_ACTION_ACTION] = Action::SERVER_ACTIVE;
+
+        $this->request($params);
+    }
+    
     /**
      * 推送更新
      *

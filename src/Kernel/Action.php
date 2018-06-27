@@ -21,8 +21,10 @@ class Action
      * 服务端提交参数
      */
     const SERVER_UPDATE = 'update';
+    const SERVER_ACTIVE = 'active';
     const SERVER = [
-        self::SERVER_UPDATE => '推送更新'
+        self::SERVER_UPDATE => '推送更新',
+        self::SERVER_ACTIVE => '远程激活'
     ];
 
     /**

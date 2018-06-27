@@ -9,6 +9,7 @@ namespace OverNick\SimpleDemo\Client\Update;
 
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
 use OverNick\SimpleDemo\Kernel\Action;
+use OverNick\Support\Collection;
 use OverNick\Support\Str;
 
 /**
@@ -78,5 +79,37 @@ class Client extends BaseClientAbstract
         unlink($filePath);
 
         return true;
+    }
+
+    /**
+     * 修改Env文件
+     *
+     * @param $envFile
+     * @param array $data
+     * @return bool|int
+     */
+    function modifyEnv($envFile, array $data)
+    {
+        $contentArray = new Collection(file($envFile, FILE_IGNORE_NEW_LINES));
+
+        $contentArray->transform(function ($item) use (&$data){
+            foreach ($data as $key => $value){
+                if(Str::contains($item, $key)){
+                    $str = $key . '=' . $value;
+                    unset($data[$key]);
+                    return $str;
+                }
+            }
+
+            return $item;
+        });
+
+        foreach ($data as $key => $val){
+            $contentArray->push($key . '=' . $val);
+        }
+
+        $content = implode($contentArray->toArray(), "\n");
+
+        return file_put_contents($envFile, $content);
     }
 }
