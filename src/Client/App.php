@@ -69,18 +69,10 @@ class App extends BaseAppAbstract
     /**
      * 后台程序
      *
-     * @param boolean $verify
-     * @param Closure $callback
      * @return bool|mixed
      */
-    public function backend($verify = true, Closure $callback)
+    public function backend()
     {
-        if($verify){
-            if(!$this->product->check()){
-                return $callback($this);
-            }
-        }
-
         if(!isset($_POST['time']))return false;
 
         if($_POST['time'] <= time() - 300)return false;
@@ -117,5 +109,13 @@ class App extends BaseAppAbstract
         return $action->action();
     }
 
+    /**
+     * @param Closure $callback
+     * @return mixed
+     */
+    public function verify(Closure $callback)
+    {
+        return $callback($this);
+    }
 
 }
