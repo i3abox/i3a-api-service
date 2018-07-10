@@ -67,24 +67,4 @@ abstract class BaseClientAbstract
         $params[Action::TYPE_SIGN] = $this->app->getSign($params);
         return $params;
     }
-
-    /**
-     * @param $result
-     * @return bool
-     */
-    public function hasSuccess($result)
-    {
-        return isset($result['errcode']) && $result['errcode'] === 0;
-    }
-
-    /**
-     * 获取数据
-     *
-     * @param $result
-     * @return mixed
-     */
-    public function getData($result)
-    {
-        return unserialize(AES::decrypt($result['data'], md5($this->app->config->get('key')),substr($this->app->config->get('key'),0,16)));
-    }
 }

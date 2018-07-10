@@ -11,6 +11,7 @@ use Closure;
 use OverNick\SimpleDemo\Action\BaseActionAbstract;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
+use OverNick\Support\AES;
 
 /**
  * Class AuthManage
@@ -67,55 +68,32 @@ class App extends BaseAppAbstract
     }
 
     /**
-     * 后台程序
-     *
-     * @return bool|mixed
-     */
-    public function backend()
-    {
-        if(!isset($_POST['time']))return false;
-
-        if($_POST['time'] <= time() - 300)return false;
-
-        // get post key
-        $getKey = $this->getServerSignKey($_POST['time']);
-
-        if (!isset($_POST[$getKey])) return false;
-
-        // verify sign
-        if(!$this->checkServerSign($_POST['time'], $_POST[$getKey]))return false;
-
-        // not params
-        if(!isset($_POST['action']) || empty($_POST['action'])) return false;
-
-        // get class name
-        $class = $this->getActions($_POST['action']);
-
-        // config not found
-        if(is_null($class))return false;
-
-        // class not found
-        if(!class_exists($class))return false;
-
-        // reflect
-        $ref = new \ReflectionClass($class);
-
-        // instance
-        $action = $ref->newInstance([$this]);
-
-        // instance of
-        if(!$action instanceof BaseActionAbstract)return false;
-
-        return $action->action();
-    }
-
-    /**
      * @param Closure $callback
      * @return mixed
      */
     public function verify(Closure $callback)
     {
         return $callback($this);
+    }
+
+    /**
+     * @param $result
+     * @return bool
+     */
+    public function hasSuccess($result)
+    {
+        return isset($result['errcode']) && $result['errcode'] === 0;
+    }
+
+    /**
+     * 获取数据
+     *
+     * @param $result
+     * @return mixed
+     */
+    public function getData($result)
+    {
+        return unserialize(AES::decrypt($result['data'], md5($this->app->config->get('key')),substr($this->app->config->get('key'),0,16)));
     }
 
 }
