@@ -24,7 +24,7 @@ class Client extends BaseClientAbstract
      *
      * @return bool|mixed
      */
-    public function backend()
+    public function run()
     {
         if(!isset($_POST['time']))return false;
 

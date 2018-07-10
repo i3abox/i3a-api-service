@@ -18,6 +18,7 @@ use OverNick\Support\AES;
  *
  * @property \OverNick\SimpleDemo\Client\Product\Client $product
  * @property \OverNick\SimpleDemo\Client\Update\Client $update
+ * @property \OverNick\SimpleDemo\Client\Backend\Client $backend
  *
  * @package OverNick\SimpleDemo
  */
@@ -28,7 +29,8 @@ class App extends BaseAppAbstract
      */
     protected $providers = [
         Product\ServiceProvider::class,
-        Update\ServiceProvider::class
+        Update\ServiceProvider::class,
+        Backend\ServiceProvider::class
     ];
 
     /**
