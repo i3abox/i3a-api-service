@@ -5,9 +5,7 @@
  * Date: 2018/7/25
  * Time: 15:29
  */
-
 namespace OverNick\SimpleDemo\Kernel\Traits;
-
 
 use OverNick\Support\AES;
 
@@ -18,7 +16,7 @@ trait AppCryptTrait
      * @param $result
      * @return bool
      */
-    public function hasSuccess($result)
+    public function hasSuccess(array $result)
     {
         return isset($result['errcode']) && $result['errcode'] === 0;
     }
@@ -26,12 +24,20 @@ trait AppCryptTrait
     /**
      * 解密数据
      *
-     * @param $result
+     * @param $data
+     * @param $key
      * @return mixed
      */
-    public function decrypt($result)
+    public function decrypt(array $data, $key = null)
     {
-        return unserialize(AES::decrypt(base64_decode($result['data']), $this->getAesKey(), $this->getAesIv()));
+        return unserialize(
+            AES::decrypt(
+                base64_decode(
+                    $data['data']),
+                    $this->getAesKey($key),
+                    $this->getAesIv($key)
+                )
+            );
     }
 
     /**
@@ -39,12 +45,17 @@ trait AppCryptTrait
      *
      * @param $data
      * @param $key
-     * @param $iv
      * @return string
      */
-    public function crypt($data, $key = null, $iv = null)
+    public function crypt($data, $key = null)
     {
-        return base64_encode(AES::encrypt(serialize($data), $this->getAesKey($key) , $this->getAesIv($iv)));
+        return base64_encode(
+            AES::encrypt(
+                serialize($data),
+                $this->getAesKey($key),
+                $this->getAesIv($key)
+            )
+        );
     }
 
     /**
