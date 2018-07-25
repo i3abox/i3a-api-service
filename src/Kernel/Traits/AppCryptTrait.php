@@ -29,9 +29,9 @@ trait AppCryptTrait
      * @param $result
      * @return mixed
      */
-    public function deCrypt($result)
+    public function decrypt($result)
     {
-        return unserialize(AES::decrypt($result['data'], $this->getAesKey(), $this->getAesIv()));
+        return unserialize(AES::decrypt(base64_decode($result['data']), $this->getAesKey(), $this->getAesIv()));
     }
 
     /**
