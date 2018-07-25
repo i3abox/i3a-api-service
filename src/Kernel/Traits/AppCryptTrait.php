@@ -53,9 +53,9 @@ trait AppCryptTrait
      * @param null $key
      * @return string
      */
-    protected function getAesKey($key = null)
+    public function getAesKey($key = null)
     {
-        return $key ?? md5($this->config->get('key'));
+        return md5($key ?? $this->config->get('key'));
     }
 
     /**
@@ -64,8 +64,8 @@ trait AppCryptTrait
      * @param null $iv
      * @return bool|string
      */
-    protected function getAesIv($iv = null)
+    public function getAesIv($iv = null)
     {
-        return $iv ?? substr(md5($this->config->get('key')),0,16);
+        return substr(md5($iv ?? $this->config->get('key')),0,16);
     }
 }
