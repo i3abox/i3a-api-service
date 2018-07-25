@@ -12,6 +12,7 @@ use OverNick\SimpleDemo\Action\UpdateAction;
 use OverNick\SimpleDemo\Action\ActiveAction;
 use OverNick\SimpleDemo\Kernel\Action;
 use OverNick\SimpleDemo\Kernel\ServiceContainer;
+use OverNick\SimpleDemo\Kernel\Traits\AppCryptTrait;
 use OverNick\Support\Arr;
 
 /**
@@ -22,6 +23,8 @@ use OverNick\Support\Arr;
  */
 class BaseAppAbstract extends ServiceContainer
 {
+    use AppCryptTrait;
+
     /**
      * @var string
      */

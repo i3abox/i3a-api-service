@@ -1,0 +1,71 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: overnic
+ * Date: 2018/7/25
+ * Time: 15:29
+ */
+
+namespace OverNick\SimpleDemo\Kernel\Traits;
+
+
+use OverNick\Support\AES;
+
+trait AppCryptTrait
+{
+
+    /**
+     * @param $result
+     * @return bool
+     */
+    public function hasSuccess($result)
+    {
+        return isset($result['errcode']) && $result['errcode'] === 0;
+    }
+
+    /**
+     * 解密数据
+     *
+     * @param $result
+     * @return mixed
+     */
+    public function deCrypt($result)
+    {
+        return unserialize(AES::decrypt($result['data'], $this->getAesKey(), $this->getAesIv()));
+    }
+
+    /**
+     * 加密数据
+     *
+     * @param $data
+     * @param $key
+     * @param $iv
+     * @return string
+     */
+    public function crypt($data, $key = null, $iv = null)
+    {
+        return base64_encode(AES::encrypt(serialize($data), $this->getAesKey($key) , $this->getAesIv($iv)));
+    }
+
+    /**
+     * 获取Aes加密Key
+     *
+     * @param null $key
+     * @return string
+     */
+    protected function getAesKey($key = null)
+    {
+        return $key ?? md5($this->config->get('key'));
+    }
+
+    /**
+     * 获取Aes加密盐值
+     *
+     * @param null $iv
+     * @return bool|string
+     */
+    protected function getAesIv($iv = null)
+    {
+        return $iv ?? substr(md5($this->config->get('key')),0,16);
+    }
+}
