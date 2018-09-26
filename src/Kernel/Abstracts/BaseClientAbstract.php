@@ -60,7 +60,7 @@ abstract class BaseClientAbstract
      */
     protected function buildPrams(array $params = [])
     {
-        $params[Action::TYPE_DOMAIN] = $this->app->config->get('domain', Arr::get($_SERVER,'SERVER_NAME', Arr::get($_SERVER, 'HTTP_HOST', 'localhost')));
+        $params[Action::TYPE_DOMAIN] = $this->app->config->get('domain', Arr::get($_SERVER,'HTTP_HOST','localhost'));
         $params[Action::TYPE_CIPHER] = $this->app->config->get('cipher');
         $params[Action::TYPE_UID] = $this->app->config->get('access_id');
         $params[Action::TYPE_PRODUCT] = $this->app->config->get('product');
