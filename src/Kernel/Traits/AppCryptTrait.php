@@ -28,12 +28,12 @@ trait AppCryptTrait
      * @param $key
      * @return mixed
      */
-    public function decrypt(array $data, $key = null)
+    public function decrypt($data, $key = null)
     {
         return unserialize(
             AES::decrypt(
                 base64_decode(
-                    $data['data']),
+                    $data),
                     $this->getAesKey($key),
                     $this->getAesIv($key)
                 )
