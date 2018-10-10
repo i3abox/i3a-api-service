@@ -30,12 +30,13 @@ class Client extends BaseClientAbstract
     /**
      * 激活产品
      *
-     * @param array $api_url
+     * @param string $api_url
      * @return string
      */
     public function active($api_url)
     {
         return $this->request('gateway/product/active', [
+            'product_id' => $this->app->config->get('product_id'),
             'api_url' => $api_url
         ]);
     }

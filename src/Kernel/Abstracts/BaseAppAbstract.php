@@ -9,7 +9,6 @@
 namespace OverNick\SimpleDemo\Kernel\Abstracts;
 
 use OverNick\SimpleDemo\Action\UpdateAction;
-use OverNick\SimpleDemo\Action\ActiveAction;
 use OverNick\SimpleDemo\Kernel\Action;
 use OverNick\SimpleDemo\Kernel\ServiceContainer;
 use OverNick\SimpleDemo\Kernel\Traits\AppCryptTrait;

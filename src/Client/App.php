@@ -47,11 +47,11 @@ class App extends BaseAppAbstract
 
     /**
      * @param array $params
-     * @return string
+     * @return array
      */
     public function buildPrams(array $params = [])
     {
-        return $this->crypt(['biz_content' => $params], $this->config->get('access_key'));
+        return ['biz_content' => $this->crypt($params, $this->config->get('access_key'))];
     }
 
 
