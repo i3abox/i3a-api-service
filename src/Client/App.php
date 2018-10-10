@@ -7,6 +7,7 @@
  */
 namespace OverNick\SimpleDemo\Client;
 
+use Closure;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
 
 /**
@@ -51,5 +52,15 @@ class App extends BaseAppAbstract
     public function buildPrams(array $params = [])
     {
         return $this->crypt(['biz_content' => $params], $this->config->get('access_key'));
+    }
+
+
+    /**
+     * @param Closure $callback
+     * @return mixed
+     */
+    public function verify(Closure $callback)
+    {
+        return $callback($this);
     }
 }
