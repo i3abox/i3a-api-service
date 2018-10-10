@@ -7,11 +7,7 @@
  */
 namespace OverNick\SimpleDemo\Client;
 
-use Closure;
-use OverNick\SimpleDemo\Action\BaseActionAbstract;
-use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
-use OverNick\Support\AES;
 
 /**
  * Class AuthManage
@@ -34,47 +30,26 @@ class App extends BaseAppAbstract
     ];
 
     /**
-     * verify sign
+     * 签名
      *
-     * @param string $time
-     * @param string $sign
-     * @return bool
-     */
-    public function checkServerSign($time, $sign)
-    {
-        // 加密值
-        $value = http_build_query([
-            'time' => $time,
-            'product' => $this->config->get('product')
-        ]);
-
-        // 验签
-        return hash_hmac('md5', $value, $this->config->get('key'), true) == $sign;
-    }
-
-    /**
      * @return string
-     * @throws \Exception
      */
-    public function gateWay()
+    public function buildSign()
     {
-        $ip = gethostbyname(parse_url($this->gateway, PHP_URL_HOST));
-
-        $match = "/^(172\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(192\.168\.[0-9]{1,3}\.[0-9]{1,3})$/";
-
-        if(preg_match($match, $ip)){
-            throw new \Exception('');
-        }
-
-        return $this->gateway;
+        $sign = [
+            'access_id' => $this->config->get('access_id'),
+            'time' => time()
+        ];
+        $sign['access_key'] = hash_hmac('sha1',http_build_query($sign), $this->app->config->get('access_key'));
+        return implode('', $sign);
     }
 
     /**
-     * @param Closure $callback
-     * @return mixed
+     * @param array $params
+     * @return string
      */
-    public function verify(Closure $callback)
+    public function buildPrams(array $params = [])
     {
-        return $callback($this);
+        return $this->crypt(['biz_content' => $params], $this->config->get('access_key'));
     }
 }

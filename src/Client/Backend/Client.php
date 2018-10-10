@@ -26,23 +26,25 @@ class Client extends BaseClientAbstract
      */
     public function run()
     {
-        if(!isset($_POST['time']))return false;
+        if(!isset($_SERVER['BACKEND_AUTH']))return false;
 
-        if($_POST['time'] <= time() - 300)return false;
+        $data = explode(":", $_SERVER['BACKEND_AUTH']);
 
-        // get post key
-        $getKey = $this->app->getServerSignKey($_POST['time']);
+        if(!is_array($data) || count($data) !== 3) return false;
 
-        if (!isset($_POST[$getKey])) return false;
+        list($action, $time, $sign) = $data;
 
-        // verify sign
-        if(!$this->app->checkServerSign($_POST['time'], $_POST[$getKey]))return false;
+        if($time <= time() - 300)return false;
+
+        $result = $this->check($action, $time, $sign);
+
+        if(!$this->app->hasSuccess(json_decode($result->getBody()->getContents()))) return false;
 
         // not params
-        if(!isset($_POST['action']) || empty($_POST['action'])) return false;
+        if(!isset($action) || empty($action)) return false;
 
         // get class name
-        $class = $this->app->getActions($_POST['action']);
+        $class = $this->app->getActions($action);
 
         // config not found
         if(is_null($class))return false;
@@ -60,5 +62,24 @@ class Client extends BaseClientAbstract
         if(!$action instanceof BaseActionAbstract)return false;
 
         return $action->action();
+    }
+
+    /**
+     * @param $action
+     * @param $time
+     * @param $sign
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function check($action, $time, $sign)
+    {
+        return $this->getHttpClient()->post($this->app->gateWay('gateway/check/sign'), [
+            'verify' => false,
+            'http_errors' => false,
+            'form_params' => [
+                'action' => $action,
+                'time' => $time,
+                'sign' => $sign
+            ]
+        ]);
     }
 }

@@ -24,43 +24,36 @@ use OverNick\Support\Arr;
 class BaseAppAbstract extends ServiceContainer
 {
     use AppCryptTrait;
-
-    /**
-     * @var string
-     */
-    protected $gateway = 'http://apiserv.i3abox.com/v1/gateway';
-
     /**
      * 动作列表
      *
      * @var array
      */
     protected $actions = [
-        Action::SERVER_UPDATE => UpdateAction::class,
-        Action::SERVER_ACTIVE => ActiveAction::class
+        Action::SERVER_UPDATE => UpdateAction::class
     ];
 
     /**
-     * Sign
-     *
-     * @param array $data
-     * @param string $key
-     * @return string
+     * @var string
      */
-    public function getSign(array $data, $key = null)
-    {
-        ksort($data);
-
-        return hash_hmac('sha1', http_build_query($data), $key ? : $this->config->get('key'));
-    }
+    protected $baseUrl = 'http://apiserv.i3abox.com';
 
     /**
-     * @param $time
-     * @return bool|string
+     * @param $url
+     * @return string
+     * @throws \Exception
      */
-    public function getServerSignKey($time)
+    public function gateWay($url = null)
     {
-        return substr(hash_hmac('md5', $time, $this->config->get('key')),0,16);
+        $ip = gethostbyname(parse_url($this->baseUrl, PHP_URL_HOST));
+
+        $match = "/^(172\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(192\.168\.[0-9]{1,3}\.[0-9]{1,3})$/";
+
+        if(preg_match($match, $ip)){
+            throw new \Exception('');
+        }
+
+        return $this->baseUrl.$url;
     }
 
     /**

@@ -8,7 +8,6 @@
 namespace OverNick\SimpleDemo\Client\Update;
 
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
-use OverNick\SimpleDemo\Kernel\Action;
 use OverNick\Support\Collection;
 use OverNick\Support\Str;
 
@@ -23,14 +22,17 @@ class Client extends BaseClientAbstract
     /**
      * 获取版本信息
      *
-     * @param array $params
+     * @param mixed|float $tag
      * @return string
      */
-    public function info(array $params = [])
+    public function info($tag)
     {
-        $params['a'] = Action::UPDATE_ACTIVE;
+        $params = [
+            'product_id' => $this->app->config->get('product_id'),
+            'tag' => $tag
+        ];
 
-        $result = $this->request($params);
+        $result = $this->request('gateway/product/update', $params);
 
         return $result;
     }

@@ -32,40 +32,29 @@ abstract class BaseClientAbstract
     }
 
     /**
+     * @param string $url
      * @param array $params
      * @param string $method
      * @param array $options
      * @return string
      */
-    public function request(array $params = [], $method = 'POST', array $options = [])
+    public function request($url, array $params = [], $method = 'POST', array $options = [])
     {
-        $params = $this->buildPrams($params);
+        $params = $this->app->buildPrams($params);
 
         $options = array_merge($options, [
             'verify' => false,
             'http_errors' => false,
-            'form_params' => $params
+            'form_params' => $params,
+            'headers' => [
+                'I3A-AUTH' => $this->app->buildSign()
+            ]
         ]);
 
-        $response = $this->getHttpClient()->request($method, $this->app->gateWay(), $options);
+        $response = $this->getHttpClient()->request($method, $this->app->gateWay($url), $options);
 
         $result = $response->getBody()->getContents();
 
         return json_decode($result, true);
-    }
-
-    /**
-     * @param array $params
-     * @return array
-     */
-    protected function buildPrams(array $params = [])
-    {
-        $params[Action::TYPE_DOMAIN] = $this->app->config->get('domain', Arr::get($_SERVER,'HTTP_HOST','localhost'));
-        $params[Action::TYPE_CIPHER] = $this->app->config->get('cipher');
-        $params[Action::TYPE_UID] = $this->app->config->get('access_id');
-        $params[Action::TYPE_PRODUCT] = $this->app->config->get('product');
-        $params[Action::TYPE_TIME] = time();
-        $params[Action::TYPE_SIGN] = $this->app->getSign($params);
-        return $params;
     }
 }
