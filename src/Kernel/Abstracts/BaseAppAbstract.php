@@ -35,7 +35,7 @@ class BaseAppAbstract extends ServiceContainer
     /**
      * @var string
      */
-    protected $baseUrl = 'http://apiserv.i3abox.com';
+    protected $baseUrl = 'https://apiserv.i3abox.com';
 
     /**
      * @param $url
