@@ -41,7 +41,7 @@ class App extends BaseAppAbstract
             'access_id' => $this->config->get('access_id'),
             'time' => time()
         ];
-        $sign['access_key'] = hash_hmac('sha1',http_build_query($sign), $this->app->config->get('access_key'));
+        $sign['access_key'] = hash_hmac('sha1',http_build_query($sign), $this->config->get('access_key'));
         return implode('', $sign);
     }
 

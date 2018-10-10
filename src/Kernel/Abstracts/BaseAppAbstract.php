@@ -53,7 +53,7 @@ class BaseAppAbstract extends ServiceContainer
             throw new \Exception('');
         }
 
-        return $this->baseUrl.$url;
+        return $this->baseUrl . '/' . ltrim($url,'/');
     }
 
     /**
