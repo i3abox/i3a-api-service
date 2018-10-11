@@ -20,6 +20,16 @@ use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
 class Client extends BaseClientAbstract
 {
     /**
+     * 验证是否是开发者角色
+     *
+     * @return string
+     */
+    public function hasDev()
+    {
+       return $this->request('gateway/check/develop');
+    }
+
+    /**
      * 后台程序
      *
      * @return bool|mixed
