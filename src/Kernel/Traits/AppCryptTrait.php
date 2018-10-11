@@ -8,6 +8,7 @@
 namespace OverNick\SimpleDemo\Kernel\Traits;
 
 use OverNick\Support\AES;
+use OverNick\Support\Arr;
 
 trait AppCryptTrait
 {
@@ -19,6 +20,20 @@ trait AppCryptTrait
     public function hasSuccess(array $result)
     {
         return isset($result['errcode']) && $result['errcode'] === 0;
+    }
+
+    /**
+     * 获取数据
+     *
+     * @param array $result
+     * @param null $key
+     * @return mixed|null
+     */
+    public function getData(array $result, $key = null)
+    {
+        if(!$this->hasSuccess($result)) return null;
+
+        return $this->decrypt(Arr::get($result, 'data'), $key);
     }
 
     /**
