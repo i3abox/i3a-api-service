@@ -46,10 +46,6 @@ class Client extends BaseClientAbstract
      */
     public function up($zipFileUrl)
     {
-        if(!filter_var($zipFileUrl, FILTER_VALIDATE_URL)){
-            throw new \Exception('file is not zipFile');
-        }
-
         // 生成本地文件路径
         $filePath = $this->app->config->get('storage_path').'/'.Str::random().'.zip';
 
