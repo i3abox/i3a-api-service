@@ -19,9 +19,11 @@ class Client extends BaseClientAbstract
      */
     public function check()
     {
+        $domain = Arr::get($_SERVER, 'HTTP_X_FORWARDED_HOST', Arr::get($_SERVER, 'HTTP_HOST', $this->app->config->get('domain','localhost')));
+
         $params = [
             'product_id' => $this->app->config->get('product_id'),
-            'domain' => $this->app->config->get('domain', Arr::get($_SERVER,'HTTP_HOST','localhost'))
+            'domain' => $domain
         ];
 
         return $this->request('gateway/product/verify', $params);
