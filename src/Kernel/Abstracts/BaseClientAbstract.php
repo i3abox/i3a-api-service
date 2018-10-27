@@ -32,6 +32,8 @@ abstract class BaseClientAbstract
     }
 
     /**
+     * 请求
+     *
      * @param string $url
      * @param array $params
      * @param string $method
@@ -56,5 +58,21 @@ abstract class BaseClientAbstract
         $result = $response->getBody()->getContents();
 
         return json_decode($result, true);
+    }
+
+    /**
+     * 获取验证域名
+     *
+     * @return mixed
+     */
+    protected function getDomain()
+    {
+        $domain = Arr::get($_SERVER, 'HTTP_X_FORWARDED_HOST', Arr::get($_SERVER, 'HTTP_HOST'));
+
+        if(empty($domain) || filter_var($domain, FILTER_VALIDATE_IP)){
+            $domain = $this->app->config->get('domain');
+        }
+
+        return $domain;
     }
 }
