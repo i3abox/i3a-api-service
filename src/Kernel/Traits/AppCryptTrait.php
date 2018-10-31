@@ -47,7 +47,7 @@ trait AppCryptTrait
     {
         return unserialize(
             AES::decrypt(
-                base64_decode(
+                hex2bin(
                     $data),
                     $this->getAesKey($key),
                     $this->getAesIv($key)
@@ -64,7 +64,7 @@ trait AppCryptTrait
      */
     public function crypt($data, $key = null)
     {
-        return base64_encode(
+        return bin2hex(
             AES::encrypt(
                 serialize($data),
                 $this->getAesKey($key),
