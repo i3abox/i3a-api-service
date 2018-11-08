@@ -21,7 +21,7 @@ class Client extends BaseClientAbstract
     {
         $params = [
             'product_id' => $this->app->config->get('product_id'),
-            'domain' => $this->getDomain()
+            'domain' => $this->app->getDomain()
         ];
 
         return $this->request('gateway/product/verify', $params);
@@ -50,7 +50,7 @@ class Client extends BaseClientAbstract
     {
         $params = [
             'product_id' => $this->app->config->get('product_id'),
-            'domain' => $this->getDomain()
+            'domain' => $this->app->getDomain()
         ];
 
         return $this->request('gateway/product/info', $params);

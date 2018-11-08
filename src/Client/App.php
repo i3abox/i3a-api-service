@@ -9,6 +9,7 @@ namespace OverNick\SimpleDemo\Client;
 
 use Closure;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
+use OverNick\Support\Arr;
 
 /**
  * Class AuthManage
@@ -54,6 +55,21 @@ class App extends BaseAppAbstract
         return ['biz_content' => $this->crypt($params, $this->config->get('access_key'))];
     }
 
+    /**
+     * get auth domain
+     *
+     * @return mixed
+     */
+    public function getDomain()
+    {
+        $domain = Arr::get($_SERVER, 'HTTP_X_FORWARDED_HOST', Arr::get($_SERVER, 'HTTP_HOST'));
+
+        if(empty($domain) || filter_var($domain, FILTER_VALIDATE_IP)){
+            $domain = $this->config->get('domain');
+        }
+
+        return $domain;
+    }
 
     /**
      * @param Closure $callback
