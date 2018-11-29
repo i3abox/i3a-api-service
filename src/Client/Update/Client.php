@@ -23,13 +23,15 @@ class Client extends BaseClientAbstract
      * 获取版本信息
      *
      * @param mixed|float $tag
+     * @param boolean $dev
      * @return string
      */
-    public function info($tag)
+    public function info($tag, $dev = null)
     {
         $params = [
             'product_id' => $this->app->config->get('product_id'),
-            'tag' => $tag
+            'tag' => $tag,
+            'dev' => $dev
         ];
 
         $result = $this->request('gateway/product/update', $params);
