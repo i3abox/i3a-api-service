@@ -5,7 +5,7 @@
  * Date: 2018/7/25
  * Time: 15:29
  */
-namespace OverNick\SimpleDemo\Kernel\Traits;
+namespace I3A\Api\Kernel\Traits;
 
 use OverNick\Support\AES;
 use OverNick\Support\Arr;

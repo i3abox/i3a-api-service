@@ -5,10 +5,10 @@
  * Date: 2018/6/21
  * Time: 16:03
  */
-namespace OverNick\SimpleDemo\Kernel\Abstracts;
+namespace I3A\Api\Kernel\Abstracts;
 
-use OverNick\SimpleDemo\Kernel\ServiceContainer;
-use OverNick\SimpleDemo\Kernel\Traits\AppCryptTrait;
+use I3A\Api\Kernel\ServiceContainer;
+use I3A\Api\Kernel\Traits\AppCryptTrait;
 use OverNick\Support\Collection;
 use OverNick\Support\Str;
 

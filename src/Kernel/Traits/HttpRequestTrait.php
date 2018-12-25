@@ -5,7 +5,7 @@
  * Date: 2018/4/16
  * Time: 13:49
  */
-namespace OverNick\SimpleDemo\Kernel\Traits;
+namespace I3A\Api\Kernel\Traits;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;

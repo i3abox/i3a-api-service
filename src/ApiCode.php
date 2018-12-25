@@ -6,7 +6,7 @@
  * Time: 14:52
  */
 
-namespace OverNick\SimpleDemo;
+namespace I3A\Api;
 
 
 class ApiCode

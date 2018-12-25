@@ -1,5 +1,5 @@
 <?php
-namespace OverNick\SimpleDemo\Kernel;
+namespace I3A\Api\Kernel;
 
 use OverNick\Support\Config;
 use Pimple\Container;

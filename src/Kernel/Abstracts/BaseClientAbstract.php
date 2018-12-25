@@ -5,9 +5,9 @@
  * Date: 2018/6/20
  * Time: 18:00
  */
-namespace OverNick\SimpleDemo\Kernel\Abstracts;
+namespace I3A\Api\Kernel\Abstracts;
 
-use OverNick\SimpleDemo\Kernel\Traits\HttpRequestTrait;
+use I3A\Api\Kernel\Traits\HttpRequestTrait;
 use Pimple\Container;
 
 /**
@@ -19,7 +19,7 @@ abstract class BaseClientAbstract
     use HttpRequestTrait;
 
     /**
-     * @var \OverNick\SimpleDemo\Client\App
+     * @var \I3A\Api\Client\App
      */
     protected $app;
 

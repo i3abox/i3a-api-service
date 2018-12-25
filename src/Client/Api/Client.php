@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: overnic
- * Date: 2018/12/25
- * Time: 14:34
- */
-namespace OverNick\SimpleDemo\Client\Api;
+namespace I3A\Api\Client\Api;
 
-use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
+use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
 
 /**
  * 接口

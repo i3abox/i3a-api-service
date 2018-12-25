@@ -1,21 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: overnic
- * Date: 2018/6/20
- * Time: 17:42
- */
-namespace OverNick\SimpleDemo\Client;
+namespace I3A\Api\Client;
 
-use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
+use I3A\Api\Kernel\Abstracts\BaseAppAbstract;
 use OverNick\Support\Arr;
 use OverNick\Support\Str;
 
 /**
  * Class AuthManage
  *
- * @property \OverNick\SimpleDemo\Client\Product\Client $product
- * @property \OverNick\SimpleDemo\Client\User\Client $user
+ * @property \I3A\Api\Client\Product\Client $product
+ * @property \I3A\Api\Client\User\Client $user
  *
  * @package OverNick\SimpleDemo
  */

@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "OverNick\\SimpleDemo\\": "src/"
+            "I3A\\Api\\": "src/"
         }
     },
     "autoload-dev": {

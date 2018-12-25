@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: overnic
- * Date: 2018/6/21
- * Time: 13:42
- */
-namespace OverNick\SimpleDemo\Client\User;
+namespace I3A\Api\Client\User;
 
-use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
+use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
 
 /**
  * 用户信息

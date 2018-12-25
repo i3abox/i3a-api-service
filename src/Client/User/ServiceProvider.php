@@ -1,11 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: overnic
- * Date: 2018/6/21
- * Time: 15:41
- */
-namespace OverNick\SimpleDemo\Client\User;
+namespace I3A\Api\Client\User;
+
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 

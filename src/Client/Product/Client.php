@@ -1,7 +1,7 @@
 <?php
-namespace OverNick\SimpleDemo\Client\Product;
+namespace I3A\Api\Client\Product;
 
-use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
+use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
 
 /**
  * 产品相关
