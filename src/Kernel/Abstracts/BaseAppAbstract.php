@@ -5,14 +5,12 @@
  * Date: 2018/6/21
  * Time: 16:03
  */
-
 namespace OverNick\SimpleDemo\Kernel\Abstracts;
 
-use OverNick\SimpleDemo\Action\UpdateAction;
-use OverNick\SimpleDemo\Kernel\Action;
 use OverNick\SimpleDemo\Kernel\ServiceContainer;
 use OverNick\SimpleDemo\Kernel\Traits\AppCryptTrait;
-use OverNick\Support\Arr;
+use OverNick\Support\Collection;
+use OverNick\Support\Str;
 
 /**
  * 基础类
@@ -23,14 +21,6 @@ use OverNick\Support\Arr;
 class BaseAppAbstract extends ServiceContainer
 {
     use AppCryptTrait;
-    /**
-     * 动作列表
-     *
-     * @var array
-     */
-    protected $actions = [
-        Action::SERVER_UPDATE => UpdateAction::class
-    ];
 
     /**
      * @var string
@@ -38,7 +28,7 @@ class BaseAppAbstract extends ServiceContainer
     protected $baseUrl = 'https://apiserv.i3abox.com';
 
     /**
-     * @param $url
+     * @param null $url
      * @return string
      * @throws \Exception
      */
@@ -56,11 +46,34 @@ class BaseAppAbstract extends ServiceContainer
     }
 
     /**
-     * @param null $key
-     * @return mixed
+     * 修改Env文件
+     *
+     * @param $envFile
+     * @param array $data
+     * @return bool|int
      */
-    public function getActions($key = null)
+    function modifyEnv($envFile, array $data)
     {
-        return Arr::get(array_merge($this->actions, $this->config->get('actions')), $key);
+        $contentArray = new Collection(file($envFile, FILE_IGNORE_NEW_LINES));
+
+        $contentArray->transform(function ($item) use (&$data){
+            foreach ($data as $key => $value){
+                if(Str::contains($item, $key)){
+                    $str = $key . '=' . $value;
+                    unset($data[$key]);
+                    return $str;
+                }
+            }
+
+            return $item;
+        });
+
+        foreach ($data as $key => $val){
+            $contentArray->push($key . '=' . $val);
+        }
+
+        $content = implode($contentArray->toArray(), "\n");
+
+        return file_put_contents($envFile, $content);
     }
 }

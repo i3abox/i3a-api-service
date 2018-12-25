@@ -39,11 +39,11 @@ trait HttpRequestTrait
 
     /**
      * 发送请求
-     *
      * @param string $method
      * @param $url
      * @param $options
      * @return \Psr\Http\Message\StreamInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function httpRequest($method = 'GET', $url, $options)
     {

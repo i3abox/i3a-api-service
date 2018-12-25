@@ -2,29 +2,25 @@
 /**
  * Created by PhpStorm.
  * User: overnic
- * Date: 2018/7/10
- * Time: 11:38
+ * Date: 2018/6/21
+ * Time: 15:41
  */
-
-namespace OverNick\SimpleDemo\Client\Backend;
-
-
+namespace OverNick\SimpleDemo\Client\User;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
 /**
- *  后台程序
+ * 更新程序
  *
- * Class ServiceProvider
- * @package OverNick\SimpleDemo\Client\Backend
+ * Class UpdateServiceProvider
+ * @package OverNick\SimpleDemo\Providers
  */
 class ServiceProvider implements ServiceProviderInterface
 {
-
     public function register(Container $pimple)
     {
-        $pimple['backend'] = function ($app){
-            return new Client($app);
+        $pimple['user'] = function() use($pimple){
+            return new Client($pimple);
         };
     }
 }

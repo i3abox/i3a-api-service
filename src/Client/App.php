@@ -7,16 +7,15 @@
  */
 namespace OverNick\SimpleDemo\Client;
 
-use Closure;
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseAppAbstract;
 use OverNick\Support\Arr;
+use OverNick\Support\Str;
 
 /**
  * Class AuthManage
  *
  * @property \OverNick\SimpleDemo\Client\Product\Client $product
- * @property \OverNick\SimpleDemo\Client\Update\Client $update
- * @property \OverNick\SimpleDemo\Client\Backend\Client $backend
+ * @property \OverNick\SimpleDemo\Client\User\Client $user
  *
  * @package OverNick\SimpleDemo
  */
@@ -27,8 +26,8 @@ class App extends BaseAppAbstract
      */
     protected $providers = [
         Product\ServiceProvider::class,
-        Update\ServiceProvider::class,
-        Backend\ServiceProvider::class
+        User\ServiceProvider::class,
+        Api\ServiceProvider::class
     ];
 
     /**
@@ -72,11 +71,44 @@ class App extends BaseAppAbstract
     }
 
     /**
-     * @param Closure $callback
-     * @return mixed
+     * 更新文件
+     *
+     * @param string $zipFileUrl 解压包远程路径
+     * @return bool
+     * @throws \Exception
      */
-    public function verify(Closure $callback)
+    public function up($zipFileUrl)
     {
-        return $callback($this);
+        // 生成本地文件路径
+        $filePath = $this->config->get('storage_path').'/'.Str::random().'.zip';
+
+        // 文件执行情况
+        $result = file_put_contents($filePath, file_get_contents($zipFileUrl));
+
+        if(!$result){
+            throw new \Exception('file download fail');
+        }
+
+        // 实例化下载类
+        $zip = new \ZipArchive();
+
+        // 获取资源
+        $res =  $zip->open($filePath);
+
+        if(!$res){
+            throw new \Exception('file open fail');
+        }
+
+        // 解压到指定目录
+        if(!$zip->extractTo($this->app->config->get('base_path'))){
+            throw new \Exception('zip fail');
+        }
+
+        // 关闭资源
+        $zip->close();
+
+        unlink($filePath);
+
+        return true;
     }
 }

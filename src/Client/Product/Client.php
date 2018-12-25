@@ -2,7 +2,6 @@
 namespace OverNick\SimpleDemo\Client\Product;
 
 use OverNick\SimpleDemo\Kernel\Abstracts\BaseClientAbstract;
-use OverNick\Support\Arr;
 
 /**
  * 产品相关
@@ -15,7 +14,8 @@ class Client extends BaseClientAbstract
     /**
      * 发起远程验证
      *
-     * @return string
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function check()
     {
@@ -30,8 +30,9 @@ class Client extends BaseClientAbstract
     /**
      * 激活产品
      *
-     * @param string $api_url
-     * @return string
+     * @param $api_url
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function active($api_url)
     {
@@ -44,7 +45,8 @@ class Client extends BaseClientAbstract
     /**
      * 获取授权信息
      *
-     * @return string
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function info()
     {
@@ -54,6 +56,49 @@ class Client extends BaseClientAbstract
         ];
 
         return $this->request('gateway/product/info', $params);
+    }
+
+    /**
+     * 获取版本信息
+     *
+     * @param $tag
+     * @param null $dev
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function version($tag, $dev = null)
+    {
+        $params = [
+            'product_id' => $this->app->config->get('product_id'),
+            'tag' => $tag,
+            'dev' => $dev
+        ];
+
+        $result = $this->request('gateway/product/update', $params);
+
+        return $result;
+    }
+
+    /**
+     * 验签
+     *
+     * @param $action
+     * @param $time
+     * @param $sign
+     * @return \Psr\Http\Message\ResponseInterface
+     * @throws \Exception
+     */
+    public function sign($action, $time, $sign)
+    {
+        return $this->getHttpClient()->post($this->app->gateWay('gateway/check/sign'), [
+            'verify' => false,
+            'http_errors' => false,
+            'form_params' => [
+                'action' => $action,
+                'time' => $time,
+                'sign' => $sign
+            ]
+        ]);
     }
 
 }

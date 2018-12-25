@@ -7,7 +7,6 @@
  */
 namespace OverNick\SimpleDemo\Client\Product;
 
-use OverNick\SimpleDemo\Client\Product\Client;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 

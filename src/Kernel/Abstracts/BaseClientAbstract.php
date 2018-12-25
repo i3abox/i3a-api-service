@@ -7,10 +7,7 @@
  */
 namespace OverNick\SimpleDemo\Kernel\Abstracts;
 
-use OverNick\SimpleDemo\Kernel\Action;
 use OverNick\SimpleDemo\Kernel\Traits\HttpRequestTrait;
-use OverNick\Support\AES;
-use OverNick\Support\Arr;
 use Pimple\Container;
 
 /**
@@ -32,13 +29,44 @@ abstract class BaseClientAbstract
     }
 
     /**
-     * 请求
+     * 接口请求
      *
-     * @param string $url
+     * @param $url
      * @param array $params
      * @param string $method
      * @param array $options
-     * @return string
+     * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function apiRequest($url, array $params = [], $method = 'POST', array $options = [])
+    {
+        $options = array_merge($options, [
+            'verify' => false,
+            'http_errors' => false,
+            'form_params' => $params,
+            'headers' => [
+                'I3A-AUTH' => $this->app->buildSign()
+            ]
+        ]);
+
+        $response = $this->getHttpClient()->request($method, $this->app->gateWay($url), $options);
+
+        if($response->getStatusCode() !== 200){
+            return false;
+        }
+
+        $result = $response->getBody()->getContents();
+
+        return json_decode($result, true);
+    }
+
+    /**
+     * @param $url
+     * @param array $params
+     * @param string $method
+     * @param array $options
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
      */
     public function request($url, array $params = [], $method = 'POST', array $options = [])
     {
@@ -54,6 +82,10 @@ abstract class BaseClientAbstract
         ]);
 
         $response = $this->getHttpClient()->request($method, $this->app->gateWay($url), $options);
+
+        if($response->getStatusCode() !== 200){
+            return false;
+        }
 
         $result = $response->getBody()->getContents();
 
