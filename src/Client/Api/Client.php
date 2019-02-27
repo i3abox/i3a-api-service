@@ -65,4 +65,18 @@ class Client extends BaseClientAbstract
         ]);
     }
 
+    /**
+     * 通过ip地址查询归属地
+     *
+     * @param $ip
+     * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function ip($ip)
+    {
+        return $this->apiRequest('gateway/api/ip', [
+            'ip' => $ip
+        ]);
+    }
+
 }
