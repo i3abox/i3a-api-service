@@ -15,7 +15,7 @@ class Client extends BaseClientAbstract
      * 发起远程验证
      *
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
      */
     public function check()
     {
@@ -32,7 +32,7 @@ class Client extends BaseClientAbstract
      *
      * @param $api_url
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
      */
     public function active($api_url)
     {
@@ -46,7 +46,7 @@ class Client extends BaseClientAbstract
      * 获取授权信息
      *
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
      */
     public function info()
     {
@@ -64,7 +64,7 @@ class Client extends BaseClientAbstract
      * @param $tag
      * @param null $dev
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
      */
     public function version($tag, $dev = null)
     {
@@ -80,25 +80,40 @@ class Client extends BaseClientAbstract
     }
 
     /**
-     * 验签
+     * 获取模版列表
      *
-     * @param $action
-     * @param $time
-     * @param $sign
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return mixed
      * @throws \Exception
      */
-    public function sign($action, $time, $sign)
+    public function templates()
     {
-        return $this->getHttpClient()->post($this->app->gateWay('gateway/check/sign'), [
-            'verify' => false,
-            'http_errors' => false,
-            'form_params' => [
-                'action' => $action,
-                'time' => $time,
-                'sign' => $sign
-            ]
-        ]);
+        $params = [
+            'product_id' => $this->app->config->get('product_id'),
+        ];
+
+        $result = $this->request('gateway/product/template', $params, 'GET');
+
+        return $result;
     }
+
+    /**
+     * 获取模版
+     *
+     * @param $tag
+     * @return mixed
+     * @throws \Exception
+     */
+    public function template($tag)
+    {
+        $params = [
+            'product_id' => $this->app->config->get('product_id'),
+            'tag' => $tag
+        ];
+
+        $result = $this->request('gateway/product/template/down', $params, 'GET');
+
+        return $result;
+    }
+
 
 }
