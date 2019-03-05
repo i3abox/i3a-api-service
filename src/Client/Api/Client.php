@@ -48,7 +48,7 @@ class Client extends BaseClientAbstract
         return $this->apiRequest('gateway/api/express', [
             'code' => $code,
             'num' => $num
-        ]);
+        ], 'GET');
     }
 
     /**
@@ -62,7 +62,7 @@ class Client extends BaseClientAbstract
     {
         return $this->apiRequest('gateway/api/company/map', [
             'com' => $com
-        ]);
+        ], 'GET');
     }
 
     /**
