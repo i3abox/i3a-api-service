@@ -43,7 +43,7 @@ abstract class BaseClientAbstract
         $options = array_merge($options, [
             'verify' => false,
             'http_errors' => false,
-            'form_params' => $params,
+            strtoupper($method) == 'GET' ? 'query' : 'form_params' => $params,
             'headers' => [
                 'I3A-AUTH' => $this->app->buildSign()
             ]
