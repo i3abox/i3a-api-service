@@ -28,7 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "OverNick\\SimpleDemo\\Test\\": "tests/"
+            "I3A\\Api\\Tests\\": "tests/"
         }
     }
 }
