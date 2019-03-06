@@ -92,7 +92,7 @@ class Client extends BaseClient
             'product_id' => $this->app->config->get('product_id'),
         ]);
 
-        $result = $this->request('gateway/product/template', $params, 'GET');
+        $result = $this->request('gateway/product/template', $params);
 
         return $result;
     }
@@ -112,7 +112,7 @@ class Client extends BaseClient
             'tag' => $tag
         ]);
 
-        $result = $this->request('gateway/product/template/down', $params, 'GET');
+        $result = $this->request('gateway/product/template/down', $params);
 
         return $result;
     }
