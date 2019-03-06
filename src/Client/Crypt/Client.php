@@ -2,6 +2,7 @@
 namespace I3A\Api\Client\Crypt;
 
 use I3A\Api\Kernel\Abstracts\BaseClient;
+use OverNick\Support\AES;
 
 /**
  * 加密组件
@@ -24,6 +25,7 @@ class Client extends BaseClient
             hex2bin($data),
             $this->getMode($this->getAesKey($key)),
             $this->getAesKey($key),
+            OPENSSL_RAW_DATA,
             $this->getAesIv($key)
         ));
     }
