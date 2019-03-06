@@ -100,14 +100,15 @@ class Client extends BaseClient
     /**
      * 获取模版下载地址
      *
+     * @param $template_id
      * @param $tag
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function template($tag)
+    public function template($template_id, $tag)
     {
         $params = $this->app->buildPrams([
-            'product_id' => $this->app->config->get('product_id'),
+            'template_id' => $template_id,
             'tag' => $tag
         ]);
 
