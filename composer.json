@@ -13,6 +13,7 @@
         "php": ">=7.0.0",
         "ext-json": "*",
         "ext-zip": "*",
+        "ext-openssl": "*",
         "guzzlehttp/guzzle": "^6.3",
         "pimple/pimple": "^3.2",
         "overnic/support": "^1.1"

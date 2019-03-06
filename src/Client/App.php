@@ -1,19 +1,21 @@
 <?php
 namespace I3A\Api\Client;
 
-use I3A\Api\Kernel\Abstracts\BaseAppAbstract;
+use I3A\Api\Kernel\Abstracts\BaseApp;
 use OverNick\Support\Arr;
-use OverNick\Support\Str;
 
 /**
  * Class AuthManage
  *
+ * @property \OverNick\Support\Config $config
  * @property \I3A\Api\Client\Product\Client $product
  * @property \I3A\Api\Client\User\Client $user
+ * @property \I3A\Api\Client\Api\Client $api
+ * @property \I3A\Api\Client\Crypt\Client $crypt
  *
  * @package OverNick\SimpleDemo
  */
-class App extends BaseAppAbstract
+class App extends BaseApp
 {
     /**
      * @var array
@@ -21,32 +23,9 @@ class App extends BaseAppAbstract
     protected $providers = [
         Product\ServiceProvider::class,
         User\ServiceProvider::class,
-        Api\ServiceProvider::class
+        Api\ServiceProvider::class,
+        Crypt\ServiceProvider::class
     ];
-
-    /**
-     * 签名
-     *
-     * @return string
-     */
-    public function buildSign()
-    {
-        $sign = [
-            'access_id' => $this->config->get('access_id'),
-            'time' => time()
-        ];
-        $sign['access_key'] = hash_hmac('sha1',http_build_query($sign), $this->config->get('access_key'));
-        return implode('', $sign);
-    }
-
-    /**
-     * @param array $params
-     * @return array
-     */
-    public function buildPrams(array $params = [])
-    {
-        return ['biz_content' => $this->crypt($params, $this->config->get('access_key'))];
-    }
 
     /**
      * get auth domain
@@ -65,44 +44,25 @@ class App extends BaseAppAbstract
     }
 
     /**
-     * 更新文件
-     *
-     * @param string $zipFileUrl 解压包远程路径
+     * @param $result
      * @return bool
-     * @throws \Exception
      */
-    public function up($zipFileUrl)
+    public function hasSuccess(array $result)
     {
-        // 生成本地文件路径
-        $filePath = $this->config->get('storage_path').'/'.Str::random().'.zip';
+        return isset($result['errcode']) && $result['errcode'] === 0;
+    }
 
-        // 文件执行情况
-        $result = file_put_contents($filePath, file_get_contents($zipFileUrl));
+    /**
+     * 获取数据
+     *
+     * @param array $result
+     * @param null $key
+     * @return mixed|null
+     */
+    public function getData(array $result, $key = null)
+    {
+        if(!$this->hasSuccess($result)) return null;
 
-        if(!$result){
-            throw new \Exception('file download fail');
-        }
-
-        // 实例化下载类
-        $zip = new \ZipArchive();
-
-        // 获取资源
-        $res =  $zip->open($filePath);
-
-        if(!$res){
-            throw new \Exception('file open fail');
-        }
-
-        // 解压到指定目录
-        if(!$zip->extractTo($this->app->config->get('base_path'))){
-            throw new \Exception('zip fail');
-        }
-
-        // 关闭资源
-        $zip->close();
-
-        unlink($filePath);
-
-        return true;
+        return $this->crypt->decrypt(Arr::get($result, 'data'), $key);
     }
 }

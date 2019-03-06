@@ -1,7 +1,7 @@
 <?php
 namespace I3A\Api\Client\Product;
 
-use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
+use I3A\Api\Kernel\Abstracts\BaseClient;
 
 /**
  * 产品相关
@@ -9,7 +9,7 @@ use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
  * Class ProductClient
  * @package OverNick\SimpleDemo\Client
  */
-class Client extends BaseClientAbstract
+class Client extends BaseClient
 {
     /**
      * 发起远程验证
@@ -19,11 +19,10 @@ class Client extends BaseClientAbstract
      */
     public function check()
     {
-        $params = [
+        $params = $this->app->buildPrams([
             'product_id' => $this->app->config->get('product_id'),
             'domain' => $this->app->getDomain()
-        ];
-
+        ]);
         return $this->request('gateway/product/verify', $params);
     }
 
@@ -36,10 +35,12 @@ class Client extends BaseClientAbstract
      */
     public function active($api_url)
     {
-        return $this->request('gateway/product/active', [
+        $params = $this->app->buildPrams([
             'product_id' => $this->app->config->get('product_id'),
             'api_url' => $api_url
         ]);
+
+        return $this->request('gateway/product/active', $params);
     }
 
     /**
@@ -50,10 +51,10 @@ class Client extends BaseClientAbstract
      */
     public function info()
     {
-        $params = [
+        $params = $this->app->buildPrams([
             'product_id' => $this->app->config->get('product_id'),
             'domain' => $this->app->getDomain()
-        ];
+        ]);
 
         return $this->request('gateway/product/info', $params);
     }
@@ -68,11 +69,11 @@ class Client extends BaseClientAbstract
      */
     public function version($tag, $dev = null)
     {
-        $params = [
+        $params = $this->app->buildPrams([
             'product_id' => $this->app->config->get('product_id'),
             'tag' => $tag,
             'dev' => $dev
-        ];
+        ]);
 
         $result = $this->request('gateway/product/update', $params);
 
@@ -83,13 +84,13 @@ class Client extends BaseClientAbstract
      * 获取模版列表
      *
      * @return mixed
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function templates()
     {
-        $params = [
+        $params = $this->app->buildPrams([
             'product_id' => $this->app->config->get('product_id'),
-        ];
+        ]);
 
         $result = $this->request('gateway/product/template', $params, 'GET');
 
@@ -97,18 +98,18 @@ class Client extends BaseClientAbstract
     }
 
     /**
-     * 获取模版
+     * 获取模版下载地址
      *
      * @param $tag
      * @return mixed
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function template($tag)
     {
-        $params = [
+        $params = $this->app->buildPrams([
             'product_id' => $this->app->config->get('product_id'),
             'tag' => $tag
-        ];
+        ]);
 
         $result = $this->request('gateway/product/template/down', $params, 'GET');
 

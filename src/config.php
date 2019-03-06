@@ -6,6 +6,10 @@
  * Time: 17:24
  */
 return [
+    // dev
+    'debug' => false,
+    // 是否默认初始化GuzzleHttp组件
+    'client' => true,
     // 产品id
     'product_id' => '',
     // 获取到的id

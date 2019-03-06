@@ -1,7 +1,7 @@
 <?php
 namespace I3A\Api\Client\Api;
 
-use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
+use I3A\Api\Kernel\Abstracts\BaseClient;
 
 /**
  * 接口
@@ -9,7 +9,7 @@ use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
  * Class Client
  * @package OverNick\SimpleDemo\Client\Api
  */
-class Client extends BaseClientAbstract
+class Client extends BaseClient
 {
     /**
      * 查询接口权限是否开通
@@ -20,7 +20,7 @@ class Client extends BaseClientAbstract
      */
     public function has($as)
     {
-        return $this->apiRequest("gateway/api/{$as}/has", [], 'GET');
+        return $this->request("gateway/api/{$as}/has", [], 'GET');
     }
 
     /**
@@ -32,7 +32,7 @@ class Client extends BaseClientAbstract
      */
     public function open($as)
     {
-        return $this->apiRequest("gateway/api/{$as}/open");
+        return $this->request("gateway/api/{$as}/open");
     }
 
     /**
@@ -45,7 +45,7 @@ class Client extends BaseClientAbstract
      */
     public function express($code, $num)
     {
-        return $this->apiRequest('gateway/api/express', [
+        return $this->request('gateway/api/express', [
             'code' => $code,
             'num' => $num
         ], 'GET');
@@ -60,7 +60,7 @@ class Client extends BaseClientAbstract
      */
     public function companyMap($com)
     {
-        return $this->apiRequest('gateway/api/company/map', [
+        return $this->request('gateway/api/company/map', [
             'com' => $com
         ], 'GET');
     }
@@ -74,7 +74,7 @@ class Client extends BaseClientAbstract
      */
     public function ip($ip)
     {
-        return $this->apiRequest('gateway/api/ip', [
+        return $this->request('gateway/api/ip', [
             'ip' => $ip
         ]);
     }

@@ -1,7 +1,7 @@
 <?php
 namespace I3A\Api\Client\User;
 
-use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
+use I3A\Api\Kernel\Abstracts\BaseClient;
 
 /**
  * 用户信息
@@ -10,7 +10,7 @@ use I3A\Api\Kernel\Abstracts\BaseClientAbstract;
  *
  * @package OverNick\SimpleDemo\Client
  */
-class Client extends BaseClientAbstract
+class Client extends BaseClient
 {
     /**
      * 验证是否是开发者角色
