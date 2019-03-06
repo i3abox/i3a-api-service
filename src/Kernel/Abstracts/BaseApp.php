@@ -34,7 +34,7 @@ class BaseApp extends ServiceContainer
             }
         }
 
-        return $this->config->get('debug', false) ? $this->devUrl : $this->baseUrl . '/' . ltrim($url,'/');
+        return ($this->config->get('debug', false) ? $this->devUrl : $this->baseUrl) . '/' . ltrim($url,'/');
     }
 
     /**
